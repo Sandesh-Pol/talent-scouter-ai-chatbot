@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TalentScout Design System - Glassmorphism Dark Theme */
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 210 20% 98%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 220 20% 7%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 160 84% 39%;
+    --accent-foreground: 220 20% 7%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 160 84% 39%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens for glassmorphism */
+    --glass-bg: 220 15% 12% / 0.6;
+    --glass-border: 220 15% 30% / 0.3;
+    --glass-highlight: 160 84% 50% / 0.1;
+
+    /* Gradients */
+    --gradient-dark: linear-gradient(135deg, hsl(220 20% 7%) 0%, hsl(220 25% 4%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(var(--glass-bg)) 0%, hsl(220 15% 8% / 0.8) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(170 80% 45%) 100%);
+    --gradient-glow: radial-gradient(ellipse at 50% 0%, hsl(160 84% 39% / 0.15) 0%, transparent 60%);
+
+    /* Shadows */
+    --shadow-glass: 0 8px 32px hsl(220 25% 2% / 0.4), inset 0 1px 0 hsl(0 0% 100% / 0.05);
+    --shadow-glow: 0 0 40px hsl(160 84% 39% / 0.2);
+    --shadow-card: 0 4px 24px hsl(220 25% 2% / 0.5);
+
+    --sidebar-background: 220 15% 9%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 160 84% 39%;
+  }
+
+  .dark {
+    --background: 220 20% 7%;
+    --foreground: 210 20% 98%;
+    --card: 220 15% 10%;
+    --card-foreground: 210 20% 98%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 220 20% 7%;
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 160 84% 39%;
+    --accent-foreground: 220 20% 7%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 160 84% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--gradient-dark);
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-xl border rounded-xl;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg border rounded-lg p-4;
+    background: linear-gradient(135deg, hsl(220 15% 14% / 0.7) 0%, hsl(220 15% 10% / 0.5) 100%);
+    border-color: hsl(var(--glass-border));
+    box-shadow: var(--shadow-card);
+  }
+
+  .glow-effect {
+    position: relative;
+  }
+
+  .glow-effect::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-glow);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .accent-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  .mono-font {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  /* Pulse glow animation */
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Mobile responsive utilities */
+  @media (max-width: 1024px) {
+    .glass-panel {
+      backdrop-filter: blur(8px);
+    }
+  }
+}
