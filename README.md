@@ -11,6 +11,15 @@
 
 ---
 
+### 📺 Project Demo
+Check out the Talent Scouter AI in action:
+
+https://github.com/user-attachments/assets/f69e1c16-e910-4086-85ae-e5dc16fae4fd
+
+
+
+
+
 ## 🌟 Key Features
 
 * **Intelligent Phase Management**: Three-stage interview flow (Profile Intake → Technical Screening → Completion) managed by a robust State Machine.
