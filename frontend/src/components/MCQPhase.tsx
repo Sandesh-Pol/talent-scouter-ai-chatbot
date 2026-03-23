@@ -4,6 +4,7 @@ import { MCQQuestion } from "./MCQQuestion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Trophy, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { getApiBaseUrl } from "@/utils/api";
 
 interface MCQPhaseProps {
     sessionId: string;
@@ -42,8 +43,9 @@ export const MCQPhase = ({ sessionId, onComplete }: MCQPhaseProps) => {
     const fetchMCQs = async () => {
         try {
             setIsLoading(true);
+            const base = getApiBaseUrl();
             const response = await fetch(
-                `http://localhost:8000/api/sessions/${sessionId}/generate-mcqs/`,
+                `${base}/api/sessions/${sessionId}/generate-mcqs/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
@@ -89,8 +91,9 @@ export const MCQPhase = ({ sessionId, onComplete }: MCQPhaseProps) => {
         setIsSubmitting(true);
 
         try {
+            const base = getApiBaseUrl();
             const response = await fetch(
-                `http://localhost:8000/api/sessions/${sessionId}/submit-mcq/`,
+                `${base}/api/sessions/${sessionId}/submit-mcq/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -152,8 +155,9 @@ export const MCQPhase = ({ sessionId, onComplete }: MCQPhaseProps) => {
     const completeMCQPhase = async () => {
         try {
             // Calculate skill ratings
+            const base = getApiBaseUrl();
             const response = await fetch(
-                `http://localhost:8000/api/sessions/${sessionId}/calculate-ratings/`,
+                `${base}/api/sessions/${sessionId}/calculate-ratings/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }

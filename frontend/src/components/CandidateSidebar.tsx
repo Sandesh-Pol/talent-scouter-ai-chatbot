@@ -4,6 +4,7 @@ import { User, Briefcase, Code, Sparkles, MapPin, Mail, Phone, Download } from "
 import { Button } from "@/components/ui/button";
 import { SkillRatings } from "./SkillRatings";
 import { useToast } from "@/hooks/use-toast";
+import { getApiBaseUrl } from "@/utils/api";
 
 interface CandidateData {
   fullName: string;
@@ -104,8 +105,9 @@ export const CandidateSidebar = ({ candidate, sessionId, currentPhase }: Candida
 
     try {
       console.log('Fetching skill ratings for session:', sessionId);
+      const base = getApiBaseUrl();
       const response = await fetch(
-        `http://localhost:8000/api/sessions/${sessionId}/status/`
+        `${base}/api/sessions/${sessionId}/status/`
       );
 
       if (response.ok) {
@@ -143,8 +145,9 @@ export const CandidateSidebar = ({ candidate, sessionId, currentPhase }: Candida
     setIsDownloading(true);
 
     try {
+      const base = getApiBaseUrl();
       const response = await fetch(
-        `http://localhost:8000/api/sessions/${sessionId}/download-report/`
+        `${base}/api/sessions/${sessionId}/download-report/`
       );
 
       if (!response.ok) {

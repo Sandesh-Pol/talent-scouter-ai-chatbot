@@ -12,6 +12,7 @@ import {
     Brain
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { getApiBaseUrl } from "@/utils/api";
 
 interface ObjectivePhaseProps {
     sessionId: string;
@@ -50,8 +51,9 @@ export const ObjectivePhase = ({ sessionId, onComplete }: ObjectivePhaseProps) =
     const fetchObjectiveQuestions = async () => {
         try {
             setIsLoading(true);
+            const base = getApiBaseUrl();
             const response = await fetch(
-                `http://localhost:8000/api/sessions/${sessionId}/generate-objectives/`,
+                `${base}/api/sessions/${sessionId}/generate-objectives/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
@@ -91,8 +93,9 @@ export const ObjectivePhase = ({ sessionId, onComplete }: ObjectivePhaseProps) =
         setIsSubmitting(true);
 
         try {
+            const base = getApiBaseUrl();
             const response = await fetch(
-                `http://localhost:8000/api/sessions/${sessionId}/submit-objective/`,
+                `${base}/api/sessions/${sessionId}/submit-objective/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -143,8 +146,9 @@ export const ObjectivePhase = ({ sessionId, onComplete }: ObjectivePhaseProps) =
     const completeObjectivePhase = async () => {
         try {
             // Calculate final skill ratings (combines MCQ + Objective scores)
+            const base = getApiBaseUrl();
             const response = await fetch(
-                `http://localhost:8000/api/sessions/${sessionId}/calculate-ratings/`,
+                `${base}/api/sessions/${sessionId}/calculate-ratings/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }

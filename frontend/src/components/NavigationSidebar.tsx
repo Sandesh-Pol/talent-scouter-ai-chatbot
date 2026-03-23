@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Plus, MessageSquare, History, Menu, X, Sparkles, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { getApiBaseUrl } from "@/utils/api";
 
 interface NavigationSidebarProps {
     onNewChat?: () => void;
@@ -30,7 +31,8 @@ export const NavigationSidebar = ({ onNewChat, isMobile = false, onClose }: Navi
     const fetchSessions = async () => {
         try {
             setIsLoadingSessions(true);
-            const response = await fetch('http://localhost:8000/api/sessions/', {
+            const base = getApiBaseUrl();
+            const response = await fetch(`${base}/api/sessions/`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             });
